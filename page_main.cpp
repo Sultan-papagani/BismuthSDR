@@ -2,13 +2,18 @@
 #include "imgui/imgui.h"
 #include "rtlsdr.h"
 #include <bits/stdc++.h>
+#include "imgui_internal.h"
+
+
+void init_something()
+{
+}
 
 void render(int w, int h)
 {
-    ImGui::Begin("Main", NULL, WINDOW_FLAGS);
-    draw_UI(w, h);
-    ImGui::End();
+    draw_UI(w,h);
 }
+
 
 void quit()
 {
