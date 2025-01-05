@@ -181,7 +181,7 @@ ImPlotStyle::ImPlotStyle() {
     DigitalBitHeight   = 8;
     DigitalBitGap      = 4;
 
-    PlotBorderSize     = 1;
+    PlotBorderSize     = 1; // bu dışındaki minnacık gri çizgi 
     MinorAlpha         = 0.25f;
     MajorTickLen       = ImVec2(10,10);
     MinorTickLen       = ImVec2(5,5);
