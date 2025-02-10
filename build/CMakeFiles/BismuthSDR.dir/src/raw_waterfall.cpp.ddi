@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles/BismuthSDR.dir/src/raw_waterfall.cpp.o",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}

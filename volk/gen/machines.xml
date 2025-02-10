@@ -1,0 +1,80 @@
+<grammar>
+
+<machine name="generic">
+<archs>generic orc|</archs>
+</machine>
+
+<machine name="neon">
+<archs>generic neon orc|</archs>
+</machine>
+
+<machine name="neonv7">
+<archs>generic neon neonv7 softfp|hardfp orc|</archs>
+</machine>
+
+<machine name="neonv8">
+<archs>generic neon neonv8 orc|</archs>
+</machine>
+
+<!-- trailing | bar means generate without either for MSVC -->
+<machine name="sse2">
+<archs>generic 32|64| mmx| sse sse2 orc|</archs>
+</machine>
+
+<machine name="sse3">
+<archs>generic 32|64| mmx| sse sse2 sse3 orc|</archs>
+</machine>
+
+<machine name="ssse3">
+<archs>generic 32|64| mmx| sse sse2 sse3 ssse3 orc|</archs>
+</machine>
+
+<machine name="sifive_u74">
+<archs>generic riscv64 orc|</archs>
+</machine>
+
+<machine name="rv64gcv">
+<archs>generic riscv64 rvv rvvseg orc|</archs>
+</machine>
+
+<!--machine name="rva22v">
+<archs>generic riscv64 rvv rvvseg rva22v orc|</archs>
+</machine-->
+
+<!--machine name="rva23">
+<archs>generic riscv64 rvv rvvseg rva22v rva23 orc|</archs>
+</machine-->
+
+<machine name="sse4_a">
+<archs>generic 32|64| mmx| sse sse2 sse3 sse4_a popcount orc|</archs>
+</machine>
+
+<machine name="sse4_1">
+<archs>generic 32|64| mmx| sse sse2 sse3 ssse3 sse4_1 orc|</archs>
+</machine>
+
+<machine name="sse4_2">
+<archs>generic 32|64| mmx| sse sse2 sse3 ssse3 sse4_1 sse4_2 popcount orc|</archs>
+</machine>
+
+<!-- trailing | bar means generate without either for MSVC -->
+<machine name="avx">
+<archs>generic 32|64| mmx| sse sse2 sse3 ssse3 sse4_1 sse4_2 popcount avx orc|</archs>
+</machine>
+
+<!-- trailing | bar means generate without either for MSVC -->
+<machine name="avx2">
+<archs>generic 32|64| mmx| sse sse2 sse3 ssse3 sse4_1 sse4_2 popcount avx fma avx2 orc|</archs>
+</machine>
+
+<!-- trailing | bar means generate without either for MSVC -->
+<machine name="avx512f">
+<archs>generic 32|64| mmx| sse sse2 sse3 ssse3 sse4_1 sse4_2 popcount avx fma avx2 avx512f orc|</archs>
+</machine>
+
+<!-- trailing | bar means generate without either for MSVC -->
+<machine name="avx512cd">
+<archs>generic 32|64| mmx| sse sse2 sse3 ssse3 sse4_1 sse4_2 popcount avx fma avx2 avx512f avx512cd orc|</archs>
+</machine>
+
+</grammar>

@@ -1,0 +1,1 @@
+cmake .. "-DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake" "-DCMAKE_C_COMPILER=C:/mingw64/bin/gcc.exe" "-DCMAKE_CXX_COMPILER=C:/mingw64/bin/g++.exe" "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2024.2.2/bin/ninja/win/x64/ninja.exe" -G "Ninja"

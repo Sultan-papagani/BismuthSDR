@@ -1,0 +1,28 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "C:/Users/sultan/Desktop/BismuthSDR/build",
+	"dir-cur-src" : "C:/Users/sultan/Desktop/BismuthSDR",
+	"dir-top-bld" : "C:/Users/sultan/Desktop/BismuthSDR/build",
+	"dir-top-src" : "C:/Users/sultan/Desktop/BismuthSDR",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"C:\\Users\\sultan\\Desktop\\BismuthSDR\\GLFW",
+		"C:\\Users\\sultan\\Desktop\\BismuthSDR\\imgui",
+		"C:\\Users\\sultan\\Desktop\\BismuthSDR\\src",
+		"volk\\include",
+		"C:\\Users\\sultan\\Desktop\\BismuthSDR\\volk\\include",
+		"C:\\Users\\sultan\\Desktop\\BismuthSDR\\volk\\kernels",
+		"C:\\Users\\sultan\\Desktop\\BismuthSDR\\rtaudio",
+		"C:\\vcpkg\\installed\\x64-windows\\include"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "C:/Users/sultan/Desktop/BismuthSDR/build/CMakeFiles/BismuthSDR.dir"
+}

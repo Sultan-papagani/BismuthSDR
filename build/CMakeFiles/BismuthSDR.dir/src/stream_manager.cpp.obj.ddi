@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles\\BismuthSDR.dir\\src\\stream_manager.cpp.obj",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}

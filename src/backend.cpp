@@ -10,13 +10,18 @@
 
 #include "backend.h"
 #include "implot.h"
-
 #include "main_page.h"
+#include "asset_manager.h"
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
 #pragma comment(lib, "legacy_stdio_definitions")
 #endif
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
+GLFWwindow* window;
+ImVec4 clear_color;
 int window_height;
 int window_width;
 
@@ -26,7 +31,7 @@ static void glfw_error_callback(int error, const char* description)
 }
 
 // Main code
-void ui_loop()
+void backend_init(int window_width, int window_height ,const char* window_name)
 {
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -62,7 +67,7 @@ void ui_loop()
 #endif
 
     // Create window with graphics context
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Bismuth", nullptr, nullptr);
+    window = glfwCreateWindow(window_width, window_height, window_name, nullptr, nullptr);
     if (window == nullptr)
         return;
     glfwMakeContextCurrent(window);
@@ -75,12 +80,11 @@ void ui_loop()
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-    //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // DOCKING
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;// DOCKING
+    //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;     // Enable Viewport mode
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
-    //ImGui::StyleColorsLight();
 
     //DOCKING
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
@@ -95,36 +99,31 @@ void ui_loop()
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
-    // Load Fonts
-    // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
-    // - AddFontFromFileTTF() will return the ImFont* so you can store it if you need to select the font among multiple.
-    // - If the file cannot be loaded, the function will return a nullptr. Please handle those errors in your application (e.g. use an assertion, or display an error and quit).
-    // - The fonts will be rasterized at a given size (w/ oversampling) and stored into a texture when calling ImFontAtlas::Build()/GetTexDataAsXXXX(), which ImGui_ImplXXXX_NewFrame below will call.
-    // - Use '#define IMGUI_ENABLE_FREETYPE' in your imconfig file to use Freetype for higher quality font rendering.
-    // - Read 'docs/FONTS.md' for more instructions and details.
-    // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
-    // - Our Emscripten build process allows embedding fonts to be accessible at runtime from the "fonts/" folder. See Makefile.emscripten for details.
-    //io.Fonts->AddFontDefault();
-    //io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\segoeui.ttf", 18.0f);
-    //io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
-    //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
-    //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
-    ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\Arial.ttf", 15.0f);
-    IM_ASSERT(font != nullptr);
+    asset_manager::font_normal = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\Arial.ttf", 15.0f);
+    IM_ASSERT(asset_manager::font_normal != nullptr);
+    asset_manager::font_big = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\Arial.ttf", 45.0f);
+    IM_ASSERT(asset_manager::font_big != nullptr);
+
+    clear_color = ImVec4(0.051f, 0.067f, 0.09f, 1.00f);
+
+    // load icon
+    GLFWimage images[1]; 
+    images[0].pixels = stbi_load("bismuthSDR_logo64_big.png", &images[0].width, &images[0].height, 0, 4);
+    glfwSetWindowIcon(window, 1, images); 
+    stbi_image_free(images[0].pixels);
 
     // init all UI elements
     init_main_page();
+}
 
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-
-    while (!glfwWindowShouldClose(window))
+int backend_ui_loop()
+{
+    ImGuiIO& io = ImGui::GetIO();
+    int error_code = 0;
+    while (!error_code)
     {
-        // Poll and handle events (inputs, window resize, etc.)
-        // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
-        // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
-        // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
-        // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
+        error_code = glfwWindowShouldClose(window);
+
         glfwPollEvents();
         if (glfwGetWindowAttrib(window, GLFW_ICONIFIED) != 0)
         {
@@ -163,6 +162,11 @@ void ui_loop()
 
     }
 
+    return error_code;
+}
+
+void backend_destroy()
+{
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
@@ -174,7 +178,5 @@ void ui_loop()
 
     glfwDestroyWindow(window);
     glfwTerminate();
-
-    return;
 }
 

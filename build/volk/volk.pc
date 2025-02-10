@@ -1,0 +1,13 @@
+prefix=C:/Program Files (x86)/BismuthSDR
+exec_prefix=C:/Program Files (x86)/BismuthSDR
+libdir=C:/Program Files (x86)/BismuthSDR/lib
+includedir=C:/Program Files (x86)/BismuthSDR/include
+LV_CXXFLAGS=
+
+
+Name: volk
+Description: VOLK: Vector Optimized Library of Kernels
+Requires:
+Version: 3.1
+Libs: -L${libdir} -lvolk
+Cflags: -I${includedir} ${LV_CXXFLAGS}

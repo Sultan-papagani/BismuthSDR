@@ -1,0 +1,32 @@
+#
+# Copyright 2020, 2022 Free Software Foundation, Inc.
+#
+# This file is part of VOLK
+#
+# SPDX-License-Identifier: LGPL-3.0-or-later
+#
+
+name: Check PR Formatting
+
+on:
+  push:
+    paths-ignore:
+      - 'tmpl/'
+      - 'include/volk/sse2neon.h'
+  pull_request:
+    paths-ignore:
+      - 'tmpl/'
+      - 'include/volk/sse2neon.h'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: gnuradio/clang-format-lint-action@v0.5-4
+      with:
+        source: '.'
+        exclude: './tmpl,./include/volk/sse2neon.h'
+        extensions: 'c,cc,cpp,cxx,h,hh'
+

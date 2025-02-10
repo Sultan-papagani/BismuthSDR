@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles/BismuthSDR.dir/imgui/implot_demo.cpp.o",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}

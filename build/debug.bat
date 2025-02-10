@@ -1,0 +1,1 @@
+gdb BismuthSDR.exe
