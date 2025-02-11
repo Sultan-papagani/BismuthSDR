@@ -109,6 +109,10 @@ void waterfall::draw()
         }
         ImGui::Text("Noise Floor: %f", noise_floor);
         ImGui::Text("Baseband dbFS: %f", max_value);
+        if (ImGui::SliderFloat("size", &size, 0, 6))
+        {
+
+        }
         ImGui::PopID();
     }
 
@@ -222,9 +226,9 @@ void waterfall::draw()
     volk_32f_s32f_calc_spectral_noise_floor_32f(&noise_floor, psd_output, 0, data_size_X);
 
     draw_list->PushClipRectFullScreen();
-    draw_list->PathArcTo(ImVec2(window_pos.x + 40*0.5f, window_pos.y + 12*0.5f), 214*0.5f, 3.141592f, 3.141592f * 1.5f);
+    draw_list->PathArcTo(ImVec2(window_pos.x + 40*0.5f*size, window_pos.y + 12*0.5f*size), 214*0.5f*size, 3.141592f, 3.141592f * 1.5f);
     draw_list->PathStroke(IM_COL32(255,255,255,255), ImDrawFlags_None, 3);
-    draw_list->AddLine(ImVec2(window_pos.x + 40*0.5f, window_pos.y + 12*0.5f), ImVec2(window_pos.x + 40*0.5f - 30, window_pos.y-120 + 12*0.5f), IM_COL32(255,0,10,255));
+    draw_list->AddLine(ImVec2(window_pos.x + 40*0.5f*size, window_pos.y + 12*0.5f*size), ImVec2(window_pos.x + size*40*0.5f - 30, window_pos.y-120*size + 12*0.5f*size), IM_COL32(255,0,10,255));
     draw_list->PopClipRect();
 
     // AMONGUS
@@ -249,7 +253,7 @@ void waterfall::draw()
     /*ImGui::SetCursorPos(beginPosForFreq);
     ImGui::PushFont(asset_manager::font_big);
     ImGui::Text("92.000.000.000Hz");
-    ImGui::PopFont();
+    ImGui::PopFont();asas
     ImGui::SetCursorPos(tempPos);*/
 
     ImGui::BeginChild("##waterfall_display", ImVec2(0,0));

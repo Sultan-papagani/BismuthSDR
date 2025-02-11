@@ -15,6 +15,8 @@
 #include "sdr_manager.h"
 #include "radio.h"
 
+#include "random_source/random_source.h"
+
 std::vector<std::unique_ptr<drawer_interface>> drawers;
 
 const char* delete_drawer_name = nullptr;
@@ -112,6 +114,7 @@ void render_main_page(int w, int h){
     if (ImGui::BeginMenuBar()){
         if (ImGui::BeginMenu("Add Source")){
             button_behaviour<RtlSdrSource>("rtl-sdr");
+            button_behaviour<RandomSource>("random-source");
             ImGui::MenuItem("Airspy");
             ImGui::MenuItem("Hackrf");
             ImGui::MenuItem("LimeSDR");

@@ -35,6 +35,8 @@ build CMakeFiles/BismuthSDR.dir/src/main_page.cpp.obj: dyndep
 
 build CMakeFiles/BismuthSDR.dir/src/radio.cpp.obj: dyndep
 
+build CMakeFiles/BismuthSDR.dir/src/random_source/random_source.cpp.obj: dyndep
+
 build CMakeFiles/BismuthSDR.dir/src/raw_waterfall.cpp.obj: dyndep
 
 build CMakeFiles/BismuthSDR.dir/src/rtlsdr/rtlsdr.cpp.obj: dyndep

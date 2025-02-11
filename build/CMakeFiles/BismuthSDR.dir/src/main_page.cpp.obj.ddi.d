@@ -544,4 +544,5 @@ CMakeFiles\BismuthSDR.dir\src\main_page.cpp.obj.ddi: \
  C:/mingw64/x86_64-w64-mingw32/include/pthread_signal.h \
  C:/mingw64/x86_64-w64-mingw32/include/pthread_compat.h \
  C:/mingw64/x86_64-w64-mingw32/include/pthread_unistd.h \
- C:/Users/sultan/Desktop/BismuthSDR/src/dsp/mono_to_stereo.h
+ C:/Users/sultan/Desktop/BismuthSDR/src/dsp/mono_to_stereo.h \
+ C:/Users/sultan/Desktop/BismuthSDR/src/random_source/random_source.h

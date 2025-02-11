@@ -3212,3 +3212,35 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "volk/lib/CMakeLists.txt:96 (try_compile)"
+    directories:
+      source: "C:/Users/sultan/Desktop/BismuthSDR/build/CMakeFiles/CMakeTmp"
+      binary: "C:/Users/sultan/Desktop/BismuthSDR/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -fcx-limited-range -Wall -Werror=incompatible-pointer-types -Werror=pointer-sign"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "C:/Users/sultan/Desktop/BismuthSDR/volk/cmake/Modules"
+      CMAKE_POSITION_INDEPENDENT_CODE: "ON"
+      VCPKG_INSTALLED_DIR: "C:/vcpkg/installed"
+      VCPKG_PREFER_SYSTEM_LIBS: "OFF"
+      VCPKG_TARGET_TRIPLET: "x64-windows"
+      Z_VCPKG_ROOT_DIR: "C:/vcpkg"
+    buildResult:
+      variable: "HAVE_RVV_INTRINSICS"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/sultan/Desktop/BismuthSDR/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): "C:/Program Files/JetBrains/CLion 2024.2.2/bin/ninja/win/x64/ninja.exe" -v cmTC_8d2e1
+        [1/2] C:\\mingw64\\bin\\gcc.exe   -fcx-limited-range -Wall -Werror=incompatible-pointer-types -Werror=pointer-sign  -std=gnu11 -o CMakeFiles/cmTC_8d2e1.dir/check-rvv-intrinsics.c.obj -c C:/Users/sultan/Desktop/BismuthSDR/cmake/Checks/check-rvv-intrinsics.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\mingw64\\bin\\gcc.exe -fcx-limited-range -Wall -Werror=incompatible-pointer-types -Werror=pointer-sign  CMakeFiles/cmTC_8d2e1.dir/check-rvv-intrinsics.c.obj -o cmTC_8d2e1.exe -Wl,--out-implib,libcmTC_8d2e1.dll.a -Wl,--major-image-version,0,--minor-image-version,0  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 && cd ."
+        
+      exitCode: 0
+...

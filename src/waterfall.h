@@ -55,6 +55,8 @@ class waterfall : public drawer_interface
         float noise_floor;
         float max_value;
 
+        float size = 1;
+
         char name[30];
         double_buffer<complex>* selected_source = nullptr;
         complex_to_psd* psd_converter;
