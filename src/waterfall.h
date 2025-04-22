@@ -12,6 +12,8 @@
 #include "dsp/complex_to_psd.h"
 #include "drawer_interface.h"
 
+#include "sdr_interface.h"
+
 #include "dsp/rotator.h"
 
 #define WATERFALL_RESOLUTION 1000000
@@ -30,6 +32,8 @@ class waterfall : public drawer_interface
         void init() override;
         void draw() override;
         void destroy() override;
+        void pushdatamanual();
+        void ASYNC();
         const char* get_name() override;
 
 
@@ -38,6 +42,9 @@ class waterfall : public drawer_interface
         void change_mode();
 
         bool running = false;
+        bool spect = false;
+        sdr_interface* selected_sdr;
+        std::thread workerThread;
 
         std::vector<std::string> sdr_list;
 

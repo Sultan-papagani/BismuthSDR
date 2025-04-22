@@ -512,6 +512,7 @@ CMakeFiles\BismuthSDR.dir\src\main_page.cpp.obj.ddi: \
  C:/Users/sultan/Desktop/BismuthSDR/src/dsp/double_buffer.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/dsp/types.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/dsp/dsp_math.h \
+ C:/Users/sultan/Desktop/BismuthSDR/src/sdr_interface.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/dsp/rotator.h \
  C:/Users/sultan/Desktop/BismuthSDR/imgui/implot.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/random \
@@ -525,7 +526,6 @@ CMakeFiles\BismuthSDR.dir\src\main_page.cpp.obj.ddi: \
  C:/Users/sultan/Desktop/BismuthSDR/src/dsp/decimating_fir.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/dsp/fft_window.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/sdr_manager.h \
- C:/Users/sultan/Desktop/BismuthSDR/src/sdr_interface.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/radio.h \
  C:/Users/sultan/Desktop/BismuthSDR/rtaudio/RtAudio.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/functional \

@@ -58,7 +58,7 @@ void RandomSource::draw(){
                 }
                 if (!sdr->running_async){
                     if (ImGui::SliderInt("Samplerate", &sdr->sample_count, 50, 20000)){
-                        sdr->set_samplerate();
+                        //sdr->set_samplerate();
                     }
                 }
                 if(ImGui::Checkbox("Tuner AGC", &sdr->tuner_agc)){

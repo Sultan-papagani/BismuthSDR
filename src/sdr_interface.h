@@ -24,6 +24,7 @@ class sdr_interface
         virtual double get_samplerate() = 0;
         virtual double get_center_frequency() = 0;
         virtual device_mode get_mode() = 0;
+        virtual bool getCompleteFrame() = 0; // TEST
 
         // set
         virtual void set_virtual_id(int _virtual_id) = 0;

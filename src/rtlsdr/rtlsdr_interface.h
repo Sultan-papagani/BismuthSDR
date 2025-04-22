@@ -61,6 +61,10 @@ class rtlsdr_interface : public sdr_interface{
             sdr_manager::register_sdr(std::move(this));
             streams.push_back(&buffer);
 
+            freq = 90000000;
+            writer = 0;
+            rtlsdr_set_center_freq(openDev, freq);
+
             return true;
         }
 
@@ -179,6 +183,34 @@ class rtlsdr_interface : public sdr_interface{
             this->workerThread = std::thread(&rtlsdr_interface::setup_async, this);
         }
 
+        bool getCompleteFrame() override
+        {
+            
+            if (freq < 104000000){
+                if (rtlsdr_get_center_freq(openDev) != freq){return false;}
+                unsigned char buff[sample_count + 1];
+                int nread;
+                rtlsdr_read_sync(openDev, &buff, sample_count, &nread);
+                for (int i = writer; i < sample_count / 2; i++) {
+                    buffer.input[i].re = ((float)buff[i * 2] - 127.4) / 128.0f;
+                    buffer.input[i].im = ((float)buff[(i * 2) + 1] - 127.4) / 128.0f;
+                }
+                freq += samplerate;
+                rtlsdr_set_center_freq(openDev, freq);
+                writer += sample_count;
+                std::cout<<"writer: "<<writer<<" freq: "<<freq/1000000.0<<std::endl;
+                return false;
+            }else
+            {
+                writer = 0;
+                freq = 90000000;
+                rtlsdr_set_center_freq(openDev, freq);
+                buffer.swap(writer);
+                return true;
+            }
+            
+        }
+
         void stop() override{
             running_async = false;
             rtlsdr_cancel_async(openDev);
@@ -219,6 +251,10 @@ class rtlsdr_interface : public sdr_interface{
             buffer.swap(sampCount);
         }
 
+        // testing
+        double freq;
+        int writer;
+
         int gains[256];
         bool running_async = false;
         int max_gain_id = 0;
@@ -229,6 +265,6 @@ class rtlsdr_interface : public sdr_interface{
         rtlsdr_dev_t* openDev;
         int sample_count = 0;
         std::thread workerThread;
-        double_buffer<complex> buffer{"rtlsdr"}; // bunu streame kaydetmeden önce rename yapmam lazım
+        double_buffer<complex> buffer{"rtlsdr", 200000}; // bunu streame kaydetmeden önce rename yapmam lazım
         
 };

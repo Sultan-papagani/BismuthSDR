@@ -102861,6 +102861,7 @@ class sdr_interface
         virtual double get_samplerate() = 0;
         virtual double get_center_frequency() = 0;
         virtual device_mode get_mode() = 0;
+        virtual bool getCompleteFrame() = 0;
 
 
         virtual void set_virtual_id(int _virtual_id) = 0;
@@ -104869,6 +104870,11 @@ class random_interface : public sdr_interface{
             if (workerThread.joinable()) {workerThread.join(); }
         }
 
+        bool getCompleteFrame() override
+        {
+            return false;
+        }
+
         void setup_async()
         {
             running_async = true;
@@ -104956,9 +104962,9 @@ void RandomSource::draw(){
                     }
                 }
                 if (!sdr->running_async){
+                    if (ImGui::SliderInt("Samplerate", &sdr->sample_count, 50, 20000)){
 
-
-
+                    }
                 }
                 if(ImGui::Checkbox("Tuner AGC", &sdr->tuner_agc)){
                     sdr->set_tuner_agc();

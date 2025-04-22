@@ -503,6 +503,7 @@ CMakeFiles\BismuthSDR.dir\src\waterfall.cpp.obj.ddi: \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/condition_variable \
  C:/Users/sultan/Desktop/BismuthSDR/src/dsp/dsp_math.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/drawer_interface.h \
+ C:/Users/sultan/Desktop/BismuthSDR/src/sdr_interface.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/dsp/rotator.h \
  C:/Users/sultan/Desktop/BismuthSDR/imgui/implot.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/sdr_manager.h \
@@ -512,7 +513,6 @@ CMakeFiles\BismuthSDR.dir\src\waterfall.cpp.obj.ddi: \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/backward/auto_ptr.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/bits/ranges_uninitialized.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/c++/pstl/glue_memory_defs.h \
- C:/Users/sultan/Desktop/BismuthSDR/src/sdr_interface.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/global_helper.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/main_page.h \
  C:/Users/sultan/Desktop/BismuthSDR/src/asset_manager.h

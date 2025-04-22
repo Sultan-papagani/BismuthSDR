@@ -27,7 +27,7 @@ waterfall::waterfall()
 {
     data_size_X = 16384;
     data_size_Y = 500;
-    min_db = -140;
+    min_db = -100;
     max_db = 0;
 
     strcpy(name, generate_random_string(10));
@@ -89,6 +89,36 @@ void waterfall::change_mode()
     selected_mode_text = modes_array[selected_mode];
 }
 
+void waterfall::pushdatamanual()
+{
+    float dataRange = max_db - min_db;
+    for (int i=0; i<data_size_X; i++){
+        float pixel = (std::clamp<float>(psd_output[i], min_db, max_db) - min_db) / dataRange;
+        int id = (int)(pixel * (WATERFALL_RESOLUTION - 1));
+        if(id > WATERFALL_RESOLUTION - 1){id = WATERFALL_RESOLUTION - 1;}
+        if(id < 0){id = 0;}
+        waterfall_buffer[i] = waterfallPallet[id];
+        }
+    memmove(&waterfall_buffer[data_size_X], waterfall_buffer, (data_size_X * (data_size_Y - 1)) * sizeof(uint32_t));
+}
+
+void waterfall::ASYNC()
+{
+    
+    while (running){
+        if (spect)
+        {
+            if (selected_sdr->getCompleteFrame())
+            {
+                psd_converter->run();
+                pushdatamanual();
+                running = false;
+            }
+        }
+    }
+}
+
+
 void waterfall::draw()
 {
 
@@ -138,7 +168,12 @@ void waterfall::draw()
                         {
                             running = true;
                             selected_source = sdr_manager::sdr_list[index]->streams[index_stream];
+                            selected_sdr = sdr_manager::sdr_list[index];
                             psd_converter->change_input(selected_source);
+                            if (spect)
+                            {
+                                //workerThread = std::thread(&waterfall::ASYNC, this);
+                            }
                         }
                         index_stream++;
                     }
@@ -182,6 +217,8 @@ void waterfall::draw()
             }
         }
 
+        if (ImGui::Checkbox("Spectrum", &spect)){}
+
 
         if (ImGui::SmallButton(running ? "|| Pause": "> Start"))
         {
@@ -194,7 +231,20 @@ void waterfall::draw()
     }
 
     if (running){
-        psd_converter->run();
+        if (spect)
+        {
+            if (spect)
+            {
+                if (selected_sdr->getCompleteFrame())
+                {
+                    psd_converter->run();
+                    pushdatamanual();
+                }
+            }
+        }else
+        {
+            psd_converter->run();
+        }
     }
 
     /*ImGui::BeginChild("##zoombar", ImVec2(0,0), ImGuiChildFlags_ResizeX);
@@ -261,15 +311,18 @@ void waterfall::draw()
 
     //push_data
     if (running){
-        float dataRange = max_db - min_db;
-        for (int i=0; i<data_size_X; i++){
-            float pixel = (std::clamp<float>(psd_output[i], min_db, max_db) - min_db) / dataRange;
-            int id = (int)(pixel * (WATERFALL_RESOLUTION - 1));
-            if(id > WATERFALL_RESOLUTION - 1){id = WATERFALL_RESOLUTION - 1;}
-            if(id < 0){id = 0;}
-            waterfall_buffer[i] = waterfallPallet[id];
-            }
-        memmove(&waterfall_buffer[data_size_X], waterfall_buffer, (data_size_X * (data_size_Y - 1)) * sizeof(uint32_t));
+        if (!spect)
+        {
+            float dataRange = max_db - min_db;
+            for (int i=0; i<data_size_X; i++){
+                float pixel = (std::clamp<float>(psd_output[i], min_db, max_db) - min_db) / dataRange;
+                int id = (int)(pixel * (WATERFALL_RESOLUTION - 1));
+                if(id > WATERFALL_RESOLUTION - 1){id = WATERFALL_RESOLUTION - 1;}
+                if(id < 0){id = 0;}
+                waterfall_buffer[i] = waterfallPallet[id];
+                }
+            memmove(&waterfall_buffer[data_size_X], waterfall_buffer, (data_size_X * (data_size_Y - 1)) * sizeof(uint32_t));
+        }
     }
     
     glBindTexture(GL_TEXTURE_2D, imageID);

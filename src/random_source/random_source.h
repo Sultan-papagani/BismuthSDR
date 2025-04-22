@@ -143,6 +143,11 @@ class random_interface : public sdr_interface{
             if (workerThread.joinable()) {workerThread.join(); }
         }
 
+        bool getCompleteFrame() override
+        {
+            return false;
+        }
+
         void setup_async()
         {
             running_async = true;
