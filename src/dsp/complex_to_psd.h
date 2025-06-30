@@ -112,12 +112,10 @@ class complex_to_psd
                 memcpy(in, input->output, sizeof(complex) * size);
             }
 
-            // Discrete Fourier transform
+            // FFT
             fftwf_execute(plan);
 
             // Calculates the log10 power value for each input point.
-            // first int: This value is divided against all the input values before the power is calculated
-            // last int:  size of the array
             volk_32fc_s32f_power_spectrum_32f(output, (lv_32fc_t*)out, psd_size, psd_size); 
 
             if (smooth_fft){
